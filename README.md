@@ -1,4 +1,4 @@
-# Bash-Aliases
+# Bash Aliases
 these are bash aliases i use in most of my linux environments
 
 these aliases work for me, in my environment and on my systems. i make no promises other than they should work if you are careful. i have used comments to indicate which aliases need certain files/packages in order to work properly. review before using.
