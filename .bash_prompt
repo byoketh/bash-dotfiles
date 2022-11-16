@@ -1,0 +1,49 @@
+# for this dotfile to work correctly, the following must be added to .bashrc
+
+#custom bash prompt (executes .bash_prompt script if present)
+#if [ -f ~/.bash_prompt ]; then
+#  . ~/.bash_prompt
+#fi
+
+# define colors using tput (8-bit color: 256 colors)
+red="\[$(tput setaf 160)\]"
+bright_red="\[$(tput setaf 196)\]"
+light_blue="\[$(tput setaf 159)\]"
+light_purple="\[$(tput setaf 153)\]"
+light_grey="\[$(tput setaf 246)\]"
+white="\[$(tput setaf 255)\]"
+bold="\[$(tput bold)\]"
+reset="\[$(tput sgr0)\]"
+
+# define the basic colors to be used in prompt construction later
+# colors for username of non-root and for root usernames:
+username_color="${reset}${light_grey}\$([[ \${EUID} == 0 ]] && echo \"${bright_red}\")";
+# color of @ and $ symbols
+symbol_color=$reset$bold$white
+# color of hostname
+hostname_color=$reset$bold$light_grey
+## color of current working directory
+directory_color=$reset$light_grey
+## Color for other characters (like the line and brackets)
+etc_color=$reset$light_grey
+
+# if last operation did not succeded, print a red ● to the prompt, otherwise print a blue one
+on_error="\$( if [[ \$? != 0 ]]; then echo \"${etc_color}[${bright_red}●${etc_color}]─\"; else echo \"${etc_color}[${light_blue}●${etc_color}]─\"; fi)"
+# the last symbol in prompt ($, for root user: #)
+symbol="${reset}${bold}${symbol_color}$(if [[ ${EUID} == 0 ]]; then echo '#'; else echo '$'; fi)"
+
+# if a virtual environment is active, get the name
+venv="\$( if [[-n "$VIRTUAL_ENV" ]]; then echo "─\(${VIRTUAL_ENV##*/}\)─"; else echo '─'; fi)"
+
+
+# build the prompt for shell terminal
+PS1="${etc_color}┌─${on_error}[";
+PS1+="${username_color}\u"; # \u is current user name
+PS1+="${symbol_color}@";
+PS1+="${hostname_color}\h" # \h is hostname
+PS1+="${etc_color}]─[";
+PS1+="${directory_color}\w"; # \w is working dir
+PS1+="${etc_color}]\n└──── "; # \n is new line
+PS1+="${symbol} ${reset}";
+
+export PS1
