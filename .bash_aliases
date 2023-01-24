@@ -10,7 +10,7 @@ alias aptu='sudo apt update'
 alias aptg='sudo apt upgrade'
 alias aptp='sudo apt purge'
 
-#snap
+# snap
 alias snapi='sudo snap install'
 alias snaprm='sudo snap remove'
 
@@ -18,6 +18,8 @@ alias snaprm='sudo snap remove'
 alias updown='sudo apt update && sudo apt upgrade -y && sudo shutdown now'
 alias upstart='sudo apt update && sudo apt upgrade -y && sudo shutdown -r now'
 
-#misc
+# misc
 alias bc='bc -lq' # start calc without banner & with math support
 alias diff='colordiff' # !!REQUIRES "colordiff" PACKAGE TO BE INSTALLED!!
+
+# if this comment is removed the dotfile will blow up
